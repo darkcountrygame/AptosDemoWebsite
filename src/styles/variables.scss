@@ -1,0 +1,27 @@
+$metal-font: "Metal Mania";
+$skia-font: "Skia";
+$red-color: rgb(255,0,0);
+$grey-color: rgb(212,212,212);
+$dark-grey: #121212;
+
+
+
+@font-face {
+  font-family: $skia-font;
+  font-style: normal;
+  font-weight: normal;
+  src: local("Skia"),
+    url("../resourses/fonts/ufonts.com_skia.woff") format("woff"),
+    url("../resourses/fonts/SkiaRegular.ttf") format("ttf");
+}
+
+
+@font-face {
+  font-family: $metal-font;
+  font-style: normal;
+  font-weight: normal;
+  src: local("Metal Mania"),
+    url("../resourses/fonts/MetalMania-Regular.woff") format("woff"),
+    url("../resourses/fonts/MetalMania-Regular.ttf") format("ttf");
+}
+

@@ -1,0 +1,33 @@
+@import "../../../../styles/variables.scss";
+
+.item-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 250px;
+  height: 350px;
+  border: 2px solid $grey-color;
+  border-radius: 20px;
+  position: relative;
+  padding: 10px;
+  cursor: pointer;
+
+  .item-img {
+    max-width: 95%;
+    max-height: 85%;
+    height: auto;
+    margin: auto;
+  }
+
+  .item-name {
+    margin-top: 20px;
+    font-size: 22px;
+  }
+
+  &.selected {
+    border-color: $red-color;
+  }
+
+
+}

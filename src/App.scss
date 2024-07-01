@@ -1,0 +1,119 @@
+@import './styles/libs/normalize';
+@import './styles/variables.scss';
+
+.app {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .MuiButtonBase-root {
+        padding: 0 !important;
+        width: 220px;
+        min-height: 45px;
+        color: white;
+        background-image: url("./resourses/btn-decor.png");
+        background-size: 100% 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: initial !important;
+        border: none;
+
+        .MuiTypography-root {
+            font-family: $metal-font !important;
+            font-size: 16px;
+        }
+
+        .MuiSvgIcon-root {
+            display: none;
+        }
+
+        &:hover {
+            cursor: pointer;
+            background-image: url("./resourses/button-spec.png");
+            background-position: center;
+            background-size: 100% 100%;
+            transition: 0.1s ease-in-out;
+            transform: scale(1.1);
+        }
+
+        &.active {
+            background-image: url("./resourses/button-spec.png");
+        }
+    }
+
+    .MuiPaper-root {
+        background-color: rgb(18, 18, 18) !important;
+    }
+
+    &.main {
+        max-width: 1440px;
+    }
+
+    .common {
+        color: white;
+
+        &::before {
+            background-color: lightgray;
+            ;
+        }
+    }
+
+    .rare {
+        color: #BAFF69;
+
+        &::before {
+            background-color: #BAFF69;
+        }
+    }
+
+    .epic {
+        color: #BB56E8;
+
+        &::before {
+            background-color: #BB56E8;
+        }
+    }
+
+    .legendary {
+        color: #91D9FF;
+
+        &::before {
+            background-color: #91D9FF;
+        }
+    }
+
+    .mythical {
+        color: #e84d19;
+
+        &::before {
+            background-color: #e84d19;
+        }
+    }
+}
+
+.MuiDialog-container {
+    .MuiPaper-root {
+        background-color: transparent;
+    }
+
+    .MuiStack-root {
+        background-color: rgb(18, 18, 18);
+        border-radius: 20px;
+    }
+
+    .MuiTypography-root {
+        color: white;
+    }
+
+    .MuiButtonBase-root {
+        color: white;
+        border-color: white;
+        background-color: rgba(0, 0, 0, 0.4);
+
+        &:hover {
+            background-color: rgba(124, 124, 124, 0.4);
+            border-color: white;
+        }
+    }
+}

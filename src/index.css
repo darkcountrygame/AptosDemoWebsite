@@ -1,0 +1,48 @@
+body {
+  background: black;
+  color: white;
+  box-sizing: border-box;
+  width: 80vw;
+  max-width: 1400px;
+  margin: 40px auto;
+
+}
+
+h1 {
+  margin: 100px auto 20px;
+  width: fit-content;
+}
+
+h2 {
+  padding-left: 100px;
+}
+
+ul, li {
+  color: white;
+  padding: 0;
+  margin: 0;
+}
+
+ul {
+  display: flex;
+  gap: 40px;
+}
+
+li {
+  list-style-type: none;
+  width: 200px;
+  height: 200px;
+  padding: 50px;
+  border: 2px solid white;
+  border-radius: 20px;
+}
+
+p {
+  margin: 10px;
+}
+
+button {
+  padding: 0;
+  cursor: pointer;
+  border: none;
+}

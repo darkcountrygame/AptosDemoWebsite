@@ -1,0 +1,22 @@
+@import '../../../styles/variables.scss';
+
+.staking-items {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+
+
+  .custom-loader {
+    margin: 0 auto;
+    padding-top: 50px;
+  }
+
+  .no-items-label {
+    font-size: 36px;
+    color: $red-color;
+    margin: 0 auto;
+  }
+}

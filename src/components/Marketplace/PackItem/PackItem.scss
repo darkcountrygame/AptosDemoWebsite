@@ -1,0 +1,240 @@
+@import '../../../styles/variables.scss';
+
+
+.pack-item {
+    width: 520px;
+    border: 1px solid #000000;
+    background: rgb(18, 18, 18);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+    font-family: "Fira Sans", sans-serif;
+    font-weight: 600;
+    height: auto;
+
+    @media (max-width: 600px) {
+        width: 90%;
+    }
+
+    .pack-img-container {
+        background: #000000;
+        border-radius: 20px;
+        text-align: center;
+        padding: 15px;
+        margin-bottom: 20px;
+
+        .pack-title {
+            font-size: 26px;
+        }
+
+        img {
+            max-height: 200px;
+            width: auto;
+        }
+
+    }
+
+    .pack-about {
+        color: #ffffff;
+        padding-top: 10px;
+        padding-bottom: 20px;
+        font-size: 22px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        div {
+            margin-bottom: 20px;
+
+            p {
+                line-height: 0.5;
+                font-size: 18px;
+            }
+
+            &:last-child {
+                p {
+                    &:last-child {
+                        color: $red-color;
+                    }
+                }
+            }
+        }
+
+        .pack-name {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .pack-available {
+            display: flex;
+            justify-content: space-between;
+        }
+
+
+        .pack-claims {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .pack-chain {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .pack-end {
+            display: flex;
+            justify-content: space-between;
+        }
+
+    }
+
+    .pack-description {
+        color: $grey-color;
+        padding: 20px;
+        min-height: 210px;
+        background: #000000;
+        border-radius: 20px;
+        margin-bottom: 20px;
+
+        ul {
+            font-size: 20px;
+
+            li {
+                list-style: none;
+                position: relative;
+                margin: 10px 0px;
+                font-size: 16px;
+
+                &:first-child {
+                    margin-top: 15px;
+                }
+
+            }
+
+            
+            .common {
+                &::before {
+                    background-color: lightgray;
+                    ;
+                }
+            }
+
+            .rare {
+                &::before {
+                    background-color: #BAFF69;
+                }
+            }
+
+            .epic {
+                &::before {
+                    background-color: #BB56E8;
+                }
+            }
+
+            .legendary {
+                &::before {
+                    background-color: #91D9FF;
+                }
+            }
+
+            .mythical {
+                &::before {
+                    background-color: #e84d19;
+                }
+            }
+
+            li::before {
+                content: "";
+                display: inline-block;
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+                margin-right: 10px;
+                vertical-align: middle;
+                font-size: 0;
+            }
+        }
+
+        p {
+            margin-top: 5px;
+        }
+
+    }
+
+    .pack-price {
+        color: $grey-color;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 22px;
+
+        p {
+            font-size: 25px;
+            padding: 0 10px;
+        }
+
+        span {
+            font-size: 22px;
+            color: $red-color;
+            text-shadow: 1px 1px 2px rgb(0, 0, 0);
+        }
+    }
+
+    .pack-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        @media (max-width: 600px) {
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .pack-amount {
+            display: flex;
+            align-items: center;
+
+            .number {
+                color: #ffffff;
+                width: 40px;
+                border-radius: 10px;
+                text-align: center;
+
+                span {
+                    font-size: 22px;
+                    font-weight: 800;
+                }
+            }
+
+            img {
+                margin: 0 15px;
+                cursor: pointer;
+                width: 30px;
+
+                &.disabled {
+                    opacity: 0.3;
+                    cursor:  default;
+                }
+
+
+            }
+        }
+
+        .pack-buy {
+            .login-first-wrapper {
+                height: auto;
+            }
+
+            button {
+                padding: 10px 50px;
+                border-radius: 20px;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .link {
+        color: #ff0000;
+        text-decoration: underline;
+    }
+}

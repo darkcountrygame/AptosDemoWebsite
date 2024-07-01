@@ -1,0 +1,21 @@
+.market-page-container {
+    margin-top: 50px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 120px;
+
+    .buy-packs {
+        font-size: 46px;
+        margin-bottom: 70px;
+    }
+
+    .market-content {
+        display: flex;
+        gap: 50px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
