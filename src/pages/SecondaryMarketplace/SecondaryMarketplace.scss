@@ -6,10 +6,11 @@
     justify-content: center;
     flex-direction: column;
     margin-bottom: 120px;
+    position: relative;
 
     .buy-packs {
         font-size: 46px;
-        margin-bottom: 70px;
+        margin-bottom: 180px;
     }
 
     .market-content {
@@ -17,5 +18,11 @@
         gap: 50px;
         flex-wrap: wrap;
         justify-content: center;
+    }
+
+    .my-nfts{
+        position: absolute;
+        top: 15%;
+        right: 2%;
     }
 }

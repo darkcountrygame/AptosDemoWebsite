@@ -7,7 +7,7 @@ export const LoginFirst = ()  => {
   return (
     <div className={"login-first-wrapper"}>
            <WalletConnector
-              networkSupport={Network.TESTNET}
+              networkSupport={Network.MAINNET}
           />
     </div>
   );

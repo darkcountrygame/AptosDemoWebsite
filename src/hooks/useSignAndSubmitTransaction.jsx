@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
-import { checkIfUserCanRecieveNfts } from '../services/aptos.service';
+import { aptos, checkIfUserCanRecieveNfts } from '../services/aptos.service';
 import { useWallet } from "@aptos-labs/wallet-adapter-react";
+
 
 const useSignAndSubmitTransaction = () => {
     const { account, signAndSubmitTransaction} = useWallet();

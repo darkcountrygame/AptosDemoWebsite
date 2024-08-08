@@ -27,7 +27,7 @@ import bg_video_unpacking_and_cycled from "../../resourses/unpacker/videos/Unpac
 import { useNavigate } from "react-router-dom";
 import { useWallet } from "@aptos-labs/wallet-adapter-react";
 import { LoginFirst } from "../../components/Shared/LoginFirst/LoginFirst";
-import { contract_address, getUnpackedTokens, getUserPacks } from "../../services/aptos.service";
+import { aptos, contract_address, getUnpackedTokens, getUserPacks } from "../../services/aptos.service";
 import useSignAndSubmitTransaction from "../../hooks/useSignAndSubmitTransaction";
 
 export const Unpacker = () => {
@@ -49,13 +49,20 @@ export const Unpacker = () => {
     setLoading(true)
     try {
       const res = await getUserPacks(account?.address);
-      const mappedPacks = res.map((p) => ({
-        amount: p.amount,
-        image: p.current_token_data?.token_uri,
-        id: p.current_token_data?.token_name,
-        name: p.current_token_data?.token_properties?.Name,
-        rarity: p.current_token_data?.token_properties?.Rarity
-      }));
+      const mappedPacks = res.map((p) =>  {
+      const properties = p?.current_token_data?.token_properties;
+
+        return {
+          amount: p.amount,
+          image: properties?.image || p.current_token_data?.token_uri,
+          id: p.current_token_data?.token_name || p?.token_data_id,
+          name: properties?.Name || properties?.name,
+          rarity: properties?.Rarity  || "Common", // for vapal pack
+          tokenStandard: p.token_standard,
+          description: properties?.description,
+          
+        }
+      });
       const groupPacks = groupItems(mappedPacks);
       setPacks(groupPacks);
     } catch (error) {
@@ -64,9 +71,6 @@ export const Unpacker = () => {
         setLoading(false)
     }
   };
-
-  
-
 
   useEffect(() => {
     if (account?.address)  {
@@ -78,12 +82,13 @@ export const Unpacker = () => {
     if (unpackedTimestamp && selectedPack) {
       setLoadingText("Unpacking...");
       setLoading(true);
+      let unpackMethod =  selectedPack.tokenStandard === 'v2' ? unpackVapal : unpack;
 
-      unpack()
+      unpackMethod()
         .then(() => {
           const filteredPacks = packs.map((p) => {
-            if (p.id === selectedPack.id) {
-              return { ...p, amount: p.amount - 1 };
+            if (p.ids.includes(selectedPack.ids[0])) {
+              return { ...p, amount: p.amount - 1, ids: p.ids.filter(i => i !== p.ids[0])};
             } else {
               return p;
             }
@@ -111,27 +116,27 @@ export const Unpacker = () => {
     audioName.play();
   };
 
+  
   const groupItems = (items) => {
     const groupedItems = {};
-    
+
     items.forEach((item) => {
-        const { name, rarity, amount } = item;
-        const key = `${name}-${rarity}`;
-        
-        if (!groupedItems[key]) {
-            groupedItems[key] = { ...item, amount: 0 };
-        }
-        
-        groupedItems[key].amount += amount;
+      const { name, rarity, amount, tokenStandard, id, image } = item;
+      const key = tokenStandard == "v1" ? `${name}-${rarity}`: 'v2';
+
+      if (!groupedItems[key]) {
+        groupedItems[key] = { name, rarity, image, tokenStandard, amount: 0, ids: [id] };
+      }
+
+      groupedItems[key].amount += amount;
+      groupedItems[key].ids.push(id);
     });
-    
+
     // Convert object to array
     const resultArray = Object.values(groupedItems);
-    
+
     return resultArray;
-};
-
-
+  };
 
   const unpack = async () => {
     await signAndSubmitTransaction({
@@ -139,7 +144,18 @@ export const Unpacker = () => {
       data: {
         function: `${contract_address}::unpacking::unpack`,
         typeArguments: [],
-        functionArguments: [selectedPack.id],
+        functionArguments: [selectedPack.ids[0]],
+      },
+    });
+  };
+  
+  const unpackVapal = async () => {
+    await signAndSubmitTransaction({
+      sender: account.address,
+      data: {
+        function: `${contract_address}::unpacking::unpack_v2`,
+        typeArguments: [],
+        functionArguments: [selectedPack.ids[0]],
       },
     });
   };
@@ -164,25 +180,27 @@ export const Unpacker = () => {
     setTimeout(() => playSound(audioPackOpens), 1000);
   };
 
-  const getUnpackedItems = async () => {
-    try {
-    const tokens = await getUnpackedTokens(account?.address);
-    setItemsEarned(tokens);
-    }catch(error) {
-      console.error(error);
-    }
-  };
 
-  const fetchUnpackedItems = async () => {
-    const data = await fetchUnpackedItems(account?.address);
+  const fetchUnpackedTokens = async () => {
+    const data = await getUnpackedTokens(account?.address);
 
     if (!data.length) {
       await sleep(1000);
 
-      return await fetchUnpackedLands();
+      return await fetchUnpackedTokens();
     }
 
     return data;
+  };
+
+  const getUnpackedItems = async () => {
+    try {
+      const tokens = await fetchUnpackedTokens();
+      const unpackedItems = tokens.map(({img, name, rarity }) => ({img, name, rarity}))
+      setItemsEarned(unpackedItems);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleError = (error) => {
@@ -215,7 +233,7 @@ export const Unpacker = () => {
             className="book-image"
             alt=""
             draggable={true}
-            onDragStart={(event) => dragPack(event, pack.id)}
+            onDragStart={(event) => dragPack(event, pack.ids[0])}
             data-id={pack.name}
             onMouseEnter={(event) => onImageHover(event)}
             onMouseLeave={(event) => onImageHoverEnd(event)}
@@ -259,7 +277,7 @@ export const Unpacker = () => {
     event.preventDefault();
 
     const packItemId = event.dataTransfer.getData("packItemId");
-    const pack = packs.find((p) => p.id === packItemId);
+    const pack = packs.find((p) => p.ids?.includes(packItemId));
 
     if (pack) {
       setSelectedPack(pack);

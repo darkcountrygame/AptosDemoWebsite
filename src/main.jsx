@@ -9,16 +9,12 @@ import { PetraWallet } from "petra-plugin-wallet-adapter";
 
 const wallets  = [
   new PetraWallet(),
-  new BloctoWallet({
-    network: NetworkName.Testnet,
-    bloctoAppId: "6d85f56e-5f2e-46cd-b5f2-5cf9695b4d46",
-  }),
   new MartianWallet(),
 ]
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AptosWalletAdapterProvider plugins={wallets} autoConnect={true}>
+    <AptosWalletAdapterProvider plugins={wallets} autoConnect={true} optInWallets={["Petra"]}>
       <App />
     </AptosWalletAdapterProvider>
   </React.StrictMode>

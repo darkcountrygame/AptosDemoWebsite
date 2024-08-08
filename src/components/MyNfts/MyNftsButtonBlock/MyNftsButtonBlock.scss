@@ -1,0 +1,61 @@
+@import "../../../styles/variables.scss";
+
+.staking-button-wrapper {
+  width: 100%;
+  height: 90px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+  align-items: center;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background: $dark-grey;
+
+  input{
+    width: 100px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid black;
+    color: red;
+    font-size: 22px;   
+    font-family: $metal-font; 
+  }
+
+  @media screen and (max-width: 550px) {
+   flex-direction: column;
+   height: 110px;
+  }
+
+  .custom-loader {
+    height: 64px;
+    width: 180px;
+    margin: 0 auto;
+
+    @media screen and (max-width: 550px) {
+      width: 150px;
+      height: 45px;
+    }
+  }
+
+  .items-info {
+    font-size: 22px;
+    font-weight: 800;
+    margin-right: 0;
+    
+    @media screen and (max-width: 550px) {
+      margin: 0 0 10px 0;
+    }
+
+    span {
+      font-size: 24px;
+      color:grey;
+    }
+  }
+}
+

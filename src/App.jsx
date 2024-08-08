@@ -15,6 +15,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { Unpacker } from "./pages/Unpacker/Unpacker.jsx";
 import { useEffect, useState } from "react";
 import { Marketplace } from "./pages/Marketplace/Marketplace.jsx";
+import { SecondaryMarketplace } from "./pages/SecondaryMarketplace/SecondaryMarketplace.jsx";
+import { MyNfts } from "./pages/MyNfts/MyNfts.jsx";
 
 
 export const  App = () =>  {
@@ -46,10 +48,12 @@ const Main = ({ setLocation }) => {
           </>
         }
       >
-        <Route path="staking" index element={<Staking />} />
-        <Route path="unpacker" element={<Unpacker />} />
-        <Route path="market" element={<Marketplace />} />
-        <Route path="*" element={<Navigate to="/staking" replace />} />
+        <Route path="/staking" index element={<Staking />} />
+        <Route path="/unpacker" element={<Unpacker />} />
+        <Route path="/market" element={<Marketplace />} />
+        <Route path="/secondary-market" element={<SecondaryMarketplace />} />
+        <Route path="/my-nfts" element={<MyNfts />} />
+        <Route path="*" element={<Navigate to="/market" replace />} />
       </Route>
     </Routes>
   );

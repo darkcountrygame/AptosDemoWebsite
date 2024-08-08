@@ -2,6 +2,8 @@ import React from "react";
 import "./StakingItem.scss";
 
 export const StakingItem = ({ item, setSelectedItems, selectedItems }) => {
+
+  
   const handleSelect = () => {
     const found = selectedItems.find((i) => i === item.name);
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import dcLogo from "../../resourses/dcLOGO.png";
-import { useWallet, truncateAddress } from '@aptos-labs/wallet-adapter-react';
+import { useWallet, truncateAddress  } from '@aptos-labs/wallet-adapter-react';
 import { WalletConnector } from "@aptos-labs/wallet-adapter-mui-design"
 
 import "./Header.scss";
@@ -56,7 +56,7 @@ useEffect(() => {
       <div className="header-content">
         <div className="header-left-container">
           <div className="header-logo">
-            <Link to="/staking">
+            <Link to="/market">
               <img src={dcLogo} alt="dc-logo" />
             </Link>
           </div>
@@ -64,6 +64,7 @@ useEffect(() => {
             <Link to="staking" className="menu-item">Staking</Link>
             <Link to="unpacker" className="menu-item">Unpacker</Link>
             <Link to="market" className="menu-item">Market</Link>
+            <Link to="secondary-market" className="menu-item">Secondary Market</Link>
           </div>
         </div>
           <div ref={menuRef} >
@@ -80,7 +81,7 @@ useEffect(() => {
               </>
               ): (
                 <WalletConnector
-                    networkSupport={Network.TESTNET}
+                    networkSupport={Network.MAINNET}
                 />
               )}
             </div>
